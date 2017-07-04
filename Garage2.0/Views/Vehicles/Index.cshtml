@@ -1,28 +1,28 @@
 ﻿@model IEnumerable<Garage2._0.Models.VehicleBase>
 
 @{
-    ViewBag.Title = ViewBag.NoOfParkedVehicles + " " /*" parkerade "*/ + ViewBag.Fordon + " i garaget"; @*<--singularis!!*@
+    ViewBag.Title = ViewBag.NoOfParkedVehicles + " " /*" parkerade "*/ + HttpUtility.HtmlDecode(ViewBag.Fordon) + " i garaget"; @*<--singularis!!*@
 }
 <h2>@ViewBag.Title</h2>
 
 <p class="hidden-print">
-    @if (ViewBag.Fordon.Equals("bilar"))
+    @if (ViewBag.Fordon.StartsWith("bil"))
     {
         @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Car" });
     }
-    else if (ViewBag.Fordon.Equals("bussar"))
+    else if (ViewBag.Fordon.StartsWith("buss"))
     {
         @Html.ActionLink("Parkera ny buss i garaget", "Park", new { typeOfVehicle = "Bus" });
     }
-    else if (ViewBag.Fordon.Equals("baatar"))
+    else if (ViewBag.Fordon.StartsWith("b&aring;t"))
     {
         @Html.ActionLink("Parkera ny båt i garaget", "Park", new { typeOfVehicle = "Boat" });
     }
-    else if (ViewBag.Fordon.Equals("flygplan"))
+    else if (ViewBag.Fordon.StartsWith("flygplan"))
     {
         @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { typeOfVehicle = "Airplane" });
     }
-    else if (ViewBag.Fordon.Equals("motorcyklar"))
+    else if (ViewBag.Fordon.StartsWith("motorcyk"))
     {
         @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { typeOfVehicle = "Motorcycle" });
     }

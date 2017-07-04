@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Garage2._0.Models.Vehicle>
 
 @{
-    ViewBag.Title = ViewBag.NoOfParkedVehicles+ " " /*" parkerade "*/ + ViewBag.Fordon + " i garaget";/* <--singularis!! */
+    ViewBag.Title = ViewBag.NoOfParkedVehicles+ " " /*" parkerade "*/ + HttpUtility.HtmlDecode(ViewBag.Fordon) + " i garaget";/* <--singularis!! */
 }
 
 <h2>@ViewBag.Title</h2>

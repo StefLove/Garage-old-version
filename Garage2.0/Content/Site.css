@@ -68,6 +68,7 @@ a:hover   { color:#d00000; }
 a:focus   { color:#d00000; }
 
 button,
+html [type="button"],
 html input[type="button"],
 /*input[type="reset"],*/
 input[type="submit"] {

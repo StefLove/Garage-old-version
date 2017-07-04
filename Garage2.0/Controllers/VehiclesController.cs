@@ -24,33 +24,67 @@ namespace Garage2._0.Controllers
             ViewBag.Fordon = "fordon";
             ViewBag.TypeOfVehicle = typeOfVehicle;
 
-            if (typeOfVehicle != "")
+            if (!string.IsNullOrEmpty(typeOfVehicle))
             {
                 switch (typeOfVehicle.ToUpper())
                 {
-                    case "CAR":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+                    case "CAR": //i if-sats kan man skriva: if (typeOfVehicle.ToUpper() == TypeOfVehicle.Car.ToString().ToUpper())
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ? "bil" : "bilar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Car.ToString(); //blir på korrekt format
+                        break;
                     case "BUS":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ? "buss" : "bussar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Bus.ToString(); //blir på korrekt format
+                        break;
                     case "BOAT":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "baatar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ? "b&aring;t" : "b&aring;tar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Boat.ToString(); //blir på korrekt format
+                        break;
                     case "AIRPLANE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane);
+                        ViewBag.Fordon = "flygplan"; //borde finnas statisk metod i klassen TypeOfVehicle
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Airplane.ToString(); //blir på korrekt format
+                        break;
                     case "MOTORCYCLE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ? "motorcykel" : "motorcyklar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Motorcycle.ToString(); //blir på korrekt format
+                        break;
                 }
                 if (vehicles.Count() == 0) return HttpNotFound();
             }
+            //Gamla koden:
+            //if (typeOfVehicle != "")
+            //{
+            //    switch (typeOfVehicle.ToUpper())
+            //    {
+            //        case "CAR":
+            //            vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+            //        case "BUS":
+            //            vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+            //        case "BOAT":
+            //            vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "b&aring;tar"; ViewBag.TypeOfVehicle = "Boat"; break;
+            //        case "AIRPLANE":
+            //            vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+            //        case "MOTORCYCLE":
+            //            vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+            //    }
+            //    if (vehicles.Count() == 0) return HttpNotFound();
+            //}
 
             if (orderBy != "")
                 switch (orderBy.ToUpper())
                 {
+                    case "MEMBERNAME": vehicles = vehicles.OrderBy(v => v.Member.Name); break;
                     case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
                     case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
-                    case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
-                    case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
-                    case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
-                    case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
+                    //case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
+                    //case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
+                    //case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
+                    //case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
                     case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); break;
                 }
 
@@ -82,34 +116,50 @@ namespace Garage2._0.Controllers
 
 
         // GET: Vehicles
-        public ActionResult DetailedIndex(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "") //SearchNumberPlate=a&typeOfVehicle=Car&OrderBy=...
+        public ActionResult DetailedIndex(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "") //SearchNumberPlate=a&typeOfVehicle=Car&OrderBy=...  
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
 
             ViewBag.Fordon = "fordon";
             ViewBag.TypeOfVehicle = typeOfVehicle;
 
-            if (typeOfVehicle != "")
+            if (!string.IsNullOrEmpty(typeOfVehicle))
             {
                 switch (typeOfVehicle.ToUpper())
                 {
-                    case "CAR":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car); ViewBag.Fordon = "bilar"; ViewBag.TypeOfVehicle = "Car"; break;
+                    case "CAR": //i if-sats kan man skriva: if (typeOfVehicle.ToUpper() == TypeOfVehicle.Car.ToString().ToUpper())
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Car);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ?  "bil" : "bilar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Car.ToString(); //blir på korrekt format
+                        break;
                     case "BUS":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus); ViewBag.Fordon = "bussar"; ViewBag.TypeOfVehicle = "Bus"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ? "buss" : "bussar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Bus.ToString(); //blir på korrekt format
+                        break;
                     case "BOAT":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat); ViewBag.Fordon = "baatar"; ViewBag.TypeOfVehicle = "Boat"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ? "b&aring;t" : "b&aring;tar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Boat.ToString(); //blir på korrekt format
+                        break;
                     case "AIRPLANE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane); ViewBag.Fordon = "flygplan"; ViewBag.TypeOfVehicle = "Airplane"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane);
+                        ViewBag.Fordon = "flygplan"; //borde finnas statisk metod i klassen TypeOfVehicle
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Airplane.ToString(); //blir på korrekt format
+                        break;
                     case "MOTORCYCLE":
-                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle); ViewBag.Fordon = "motorcyklar"; ViewBag.TypeOfVehicle = "Motorcycle"; break;
+                        vehicles = vehicles.Where(v => v.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle);
+                        ViewBag.Fordon = (vehicles.Count() == 1) ? "motorcykel" : "motorcyklar"; //borde finnas statisk metod i klassen VehicleType
+                        ViewBag.TypeOfVehicle = TypeOfVehicle.Motorcycle.ToString(); //blir på korrekt format
+                        break;
                 }
                 if (vehicles.Count() == 0) return HttpNotFound();
             }
 
-            if (orderBy != "")
+            if (!string.IsNullOrEmpty(orderBy))
                 switch (orderBy.ToUpper())
                 {
+                    case "MEMBERNAME": vehicles = vehicles.OrderBy(v => v.Member.Name); break;
                     case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
                     case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
                     case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
@@ -149,25 +199,62 @@ namespace Garage2._0.Controllers
         }
 
         // GET: Vehicles/Park
-        public ActionResult Park(string typeOfVehicle)
+        public ActionResult Park(string typeOfVehicle = "Vehicle" )
         {
-            if (db.Members.Count() == 0)
-            {
-                //ViewBag.ErrorMessage = "Medlemslistan är tom. Registrera minst en medlem först.";
-                return View("../Members/Create");
-            }
+            //if (db.Members.Count() == 0)
+            //{
+            //    //ViewBag.ErrorMessage = "Medlemslistan är tom. Registrera minst en medlem först.";
+            //    return View("../Members/Create");
+            //}
 
             ViewBag.MemberId = new SelectList(db.Members, "Id", "Name");
+            //var selected = db.VehicleTypes.Where(s => s.TypeOfVehicle == TypeOfVehicle...);
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id");
 
-            ViewBag.TypeOfVehicle = typeOfVehicle;
+            //ViewBag.TypeOfVehicle = typeOfVehicle;
 
+            if (typeOfVehicle.ToUpper() == TypeOfVehicle.Car.ToString().ToUpper())
+            {
+                ViewBag.TypeOfVehicle = TypeOfVehicle.Car.ToString();
+                ViewBag.NyttFordon = "ny bil";
+                ViewBag.ParkeraFordon = "bilen";
+            }
+            else if (typeOfVehicle.ToUpper() == TypeOfVehicle.Bus.ToString().ToUpper())
+            {
+                ViewBag.TypeOfVehicle = TypeOfVehicle.Bus.ToString();
+                ViewBag.NyttFordon = "ny buss";
+                ViewBag.ParkeraFordon = "bussen";
+            }
+            else if (typeOfVehicle.ToUpper().Equals(TypeOfVehicle.Boat.ToString().ToUpper()))
+            {
+                ViewBag.TypeOfVehicle = TypeOfVehicle.Boat.ToString();
+                ViewBag.NyttFordon = "ny b&aring;t";
+                ViewBag.ParkeraFordon = "b&aring;ten";
+            }
+            else if (typeOfVehicle.ToUpper() == TypeOfVehicle.Airplane.ToString().ToUpper())
+            {
+                ViewBag.TypeOfVehicle = TypeOfVehicle.Airplane.ToString();
+                ViewBag.NyttFordon = "nytt flygplan";
+                ViewBag.ParkeraFordon = "flygplanet";
+            }
+            else if (typeOfVehicle.ToUpper() == TypeOfVehicle.Motorcycle.ToString().ToUpper())
+            {
+                ViewBag.TypeOfVehicle = TypeOfVehicle.Motorcycle.ToString();
+                ViewBag.NyttFordon = "ny motorcykel";
+                ViewBag.ParkeraFordon = "motorcykeln";
+            }
+            else
+            {
+                ViewBag.TypeOfVehicle = typeOfVehicle;
+                ViewBag.NyttFordon = "nytt fordon";
+                ViewBag.ParkeraFordon = "fordonet";
+            }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Park([Bind(Include = "Id,TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] Vehicle vehicle)
+        public ActionResult Park([Bind(Include = "Id,VehicleType.TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
