@@ -22,6 +22,7 @@ namespace Garage2._0.Models
         [Display(Name = "Adress")]
         public string Address { get; set; }
 
+        [Display(Name = "Fordon")]
         public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }

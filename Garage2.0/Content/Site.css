@@ -51,6 +51,7 @@ footer {
    text-shadow: 4px 4px #3b2ee2;
 }
 
+/* Bootstrap Overrides */
 /* Stefans tillägg */
 body {
     /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -63,9 +64,9 @@ body {
 a { text-decoration:none; color:darkblue; font-weight:bold; }
 a:link    { color:darkblue; }
 a:visited { color:darkblue; }
-a:active  { color:#d00000; }
-a:hover   { color:#d00000; }
-a:focus   { color:#d00000; }
+a:active  { color:green }
+a:hover   { color:green !important; } /* !important gillas inte Av Github. Det tyder på dålig struktur i css!! */
+a:focus   { color:green !important; } /* (Men det tyder ju snarare på krånglig struktur i bootstrap.css) */
 
 button,
 html [type="button"],
@@ -74,7 +75,12 @@ html input[type="button"],
 input[type="submit"] {
     border-radius: 10px;
     color: darkblue;
-    background-color: lightyellow;
+    background-color: lightgoldenrodyellow;
+    border-color: darkblue;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    color: yellow;
+    background-color: green;
     border-color: darkblue;
 }
 
@@ -88,6 +94,45 @@ input[type="submit"] {
 th, tr, td {
     border: 1px solid darkblue;
     padding: 8px !important; /* <--- important!? */
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    background-color: darkblue;
+    border-color:lightblue;
+}
+.navbar-inverse .navbar-brand {
+    color: lightyellow;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: darkblue;
+    background-color: lightgoldenrodyellow;
+}
+/*.navbar-inverse .navbar-brand > a:hover {
+    color: #d00000;
+}*/
+.navbar-inverse .navbar-nav > li > a {
+    color: lightyellow;
+}
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color:  lightgoldenrodyellow;
+    border-bottom-color: #999999;
+}
+/*.navbar-inverse .navbar-nav > .dropdown > a:active .caret {
+    border-top-color: #d00000;
+    border-bottom-color: #999999;
+}*/
+.navbar-inverse .navbar-nav > .dropdown > a:hover .caret {
+    border-top-color: green;
+    border-bottom-color: #999999;
+}
+.navbar-inverse .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #d00000;
+    border-bottom-color: #999999;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color:darkblue;
+    text-decoration: none;
+    background-color: lightgoldenrodyellow;
 }
 
 @media print {

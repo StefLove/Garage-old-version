@@ -17,9 +17,31 @@ namespace Garage2._0.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: Vehicles
-        public ActionResult Index(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "") //SearchNumberPlate=a&typeOfVehicle=Car&OrderBy=...
+        public ActionResult Index(int memberId = 0, string memberName = "", string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "") //, string detailed
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+
+            ViewBag.MemberName = "";
+
+            if (memberId > 0)
+            {
+                ViewBag.MemberId = memberId;
+                ViewBag.MemberName = db.Members.Find(memberId).Name;
+                //ViewBag.MedlemHar = ViewBag.MemberName + " har ";
+                vehicles = vehicles.Where(v => v.MemberId == memberId);
+            }
+            else if (!string.IsNullOrEmpty(memberName))
+            {
+                ViewBag.MemberId = db.Members.ToList().Find(m => m.Name == memberName).Id;
+                ViewBag.MemberName = memberName;
+                //ViewBag.MedlemHar = memberName + " har ";
+                vehicles = vehicles.Where(v => v.Member.Name == memberName);
+            }
+
+            if (!String.IsNullOrEmpty(searchNumberPlate))
+            {
+                vehicles = vehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
+            }
 
             ViewBag.Fordon = "fordon";
             ViewBag.TypeOfVehicle = typeOfVehicle;
@@ -88,23 +110,18 @@ namespace Garage2._0.Controllers
                     case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); break;
                 }
 
-            if (!String.IsNullOrEmpty(searchNumberPlate))
-            {
-                vehicles = vehicles.Where(p => p.RegNumber.StartsWith(searchNumberPlate));
-            }
-
             List<VehicleBase> vehicleBaseList = new List<VehicleBase>();
 
             if (vehicles.Count() > 0)
             {
-                foreach (var item in vehicles)
+                foreach (var vehicle in vehicles)
                 {
                     var vehicleBase = new VehicleBase();
-                    vehicleBase.Id = item.Id;
-                    vehicleBase.MemberName = item.Member.Name;
-                    vehicleBase.VehicleType = item.VehicleType.TypeOfVehicle.ToString();
-                    vehicleBase.RegNumber = item.RegNumber;
-                    vehicleBase.CheckInTime = item.CheckInTime;
+                    vehicleBase.Id = vehicle.Id;
+                    vehicleBase.MemberName = vehicle.Member.Name;
+                    vehicleBase.VehicleType = vehicle.VehicleType.TypeOfVehicle.ToString();
+                    vehicleBase.RegNumber = vehicle.RegNumber;
+                    vehicleBase.CheckInTime = vehicle.CheckInTime;
                     vehicleBaseList.Add(vehicleBase);
                 }
             }
@@ -116,9 +133,27 @@ namespace Garage2._0.Controllers
 
 
         // GET: Vehicles
-        public ActionResult DetailedIndex(string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "") //SearchNumberPlate=a&typeOfVehicle=Car&OrderBy=...  
+        public ActionResult DetailedIndex(int memberId = 0, string memberName = "", string searchNumberPlate = "", string typeOfVehicle = "", string orderBy = "")
         {
             var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
+
+            //if (memberId > 0) vehicles = vehicles.Where(v => v.MemberId == memberId);
+            ViewBag.MemberName = "";
+
+            if (memberId > 0)
+            {
+                ViewBag.MemberId = memberId;
+                ViewBag.MemberName = db.Members.Find(memberId).Name;
+                //ViewBag.MedlemHar = ViewBag.MemberName + " har ";
+                vehicles = vehicles.Where(v => v.MemberId == memberId);
+            }
+            else if (!string.IsNullOrEmpty(memberName))
+            {
+                ViewBag.MemberId = db.Members.ToList().Find(m => m.Name == memberName).Id;
+                ViewBag.MemberName = memberName;
+                //ViewBag.MedlemHar = memberName + " har ";
+                vehicles = vehicles.Where(v => v.Member.Name == memberName);
+            }
 
             ViewBag.Fordon = "fordon";
             ViewBag.TypeOfVehicle = typeOfVehicle;
@@ -176,7 +211,7 @@ namespace Garage2._0.Controllers
 
             ViewBag.NoOfParkedVehicles = vehicles.Count();
 
-            if (vehicles.Count() >0)
+            if (vehicles.Count() > 0)
             {
                 return View(vehicles.ToList());
             }
@@ -190,88 +225,153 @@ namespace Garage2._0.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Vehicle vehicle = db.Vehicles.Find(id);
+
             if (vehicle == null)
             {
                 return HttpNotFound();
             }
+            else if (vehicle.VehicleType.TypeOfVehicle == TypeOfVehicle.Car)
+            {
+                ViewBag.Fordonstyp = "Bil";
+            }
+            else if (vehicle.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus)
+            {
+                ViewBag.Fordonstyp = "Buss";
+            }
+            else if (vehicle.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat)
+            {
+                ViewBag.Fordonstyp = "Båt";
+            }
+            else if (vehicle.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane)
+            {
+                ViewBag.Fordonstyp = "Flygplan";
+            }
+            else if (vehicle.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle)
+            {
+                ViewBag.Fordonstyp = "Motorcykel";
+            }
+
             return View(vehicle);
         }
 
         // GET: Vehicles/Park
-        public ActionResult Park(string typeOfVehicle = "Vehicle" )
+        public ActionResult Park(int memberId = 0, string memberName = "", string typeOfVehicle = "Vehicle")
         {
-            //if (db.Members.Count() == 0)
-            //{
-            //    //ViewBag.ErrorMessage = "Medlemslistan är tom. Registrera minst en medlem först.";
-            //    return View("../Members/Create");
-            //}
+            int MemberId = memberId;
 
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name");
-            //var selected = db.VehicleTypes.Where(s => s.TypeOfVehicle == TypeOfVehicle...);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id");
+            if (!string.IsNullOrEmpty(memberName))
+            {
+                MemberId = db.Members.Find(memberName).Id;
+            }
+
+            if (MemberId > 0) ViewBag.MemberId = new SelectList(db.Members.Include(m => m.Vehicles).Where(m2 => m2.Id == MemberId), "Id", "Name", MemberId); //<-------tillagt
+            else ViewBag.MemberId = new SelectList(db.Members.Include(m => m.Vehicles), "Id", "Name");           //----------------------Include behövs?
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle), "Id", "Id"); //<---------------------Include behövs?
 
             //ViewBag.TypeOfVehicle = typeOfVehicle;
 
+            //if (memberId > 0)
+            //{
+            //    ViewBag.MemberName = 
+            //    //ViewBag.MedlemHar = db.Members.Find(memberId).Name + " har ";
+            //    //ViewBag.MemberId = memberId; //behövs?
+            //    //vehicles = vehicles.Where(v => v.MemberId == memberId);
+            //}
+            //else if (!string.IsNullOrEmpty(memberName))
+            //{
+            //    //ViewBag.MedlemHar = memberName + " har ";
+            //    //vehicles = vehicles.Where(v => v.Member.Name == memberName);
+            //}
+
             if (typeOfVehicle.ToUpper() == TypeOfVehicle.Car.ToString().ToUpper())
             {
-                ViewBag.TypeOfVehicle = TypeOfVehicle.Car.ToString();
+                //ViewBag.TypeOfVehicle = TypeOfVehicle.Car.ToString();
                 ViewBag.NyttFordon = "ny bil";
                 ViewBag.ParkeraFordon = "bilen";
+                ViewBag.AntalHjul = 4;
+                //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle).Where(tv => tv.TypeOfVehicle == TypeOfVehicle.Car), "Id", "Id", TypeOfVehicle.Car);
             }
             else if (typeOfVehicle.ToUpper() == TypeOfVehicle.Bus.ToString().ToUpper())
             {
-                ViewBag.TypeOfVehicle = TypeOfVehicle.Bus.ToString();
+                //ViewBag.TypeOfVehicle = TypeOfVehicle.Bus.ToString();
                 ViewBag.NyttFordon = "ny buss";
                 ViewBag.ParkeraFordon = "bussen";
+                ViewBag.AntalHjul = 4;
+                ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle).Where(tv => tv.TypeOfVehicle == TypeOfVehicle.Bus), "Id", "Id", TypeOfVehicle.Bus);
             }
             else if (typeOfVehicle.ToUpper().Equals(TypeOfVehicle.Boat.ToString().ToUpper()))
             {
-                ViewBag.TypeOfVehicle = TypeOfVehicle.Boat.ToString();
-                ViewBag.NyttFordon = "ny b&aring;t";
-                ViewBag.ParkeraFordon = "b&aring;ten";
+                //ViewBag.TypeOfVehicle = TypeOfVehicle.Boat.ToString();
+                ViewBag.NyttFordon = "ny båt"; 
+                ViewBag.ParkeraFordon = "b&#229;ten";
+                ViewBag.AntalHjul = 0;
+                //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle).Where(tv => tv.TypeOfVehicle == TypeOfVehicle.Boat), "Id", "Id", TypeOfVehicle.Boat);
             }
             else if (typeOfVehicle.ToUpper() == TypeOfVehicle.Airplane.ToString().ToUpper())
             {
-                ViewBag.TypeOfVehicle = TypeOfVehicle.Airplane.ToString();
+                //ViewBag.TypeOfVehicle = TypeOfVehicle.Airplane.ToString();
                 ViewBag.NyttFordon = "nytt flygplan";
                 ViewBag.ParkeraFordon = "flygplanet";
+                ViewBag.AntalHjul = 8;
+                //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle).Where(tv => tv.TypeOfVehicle == TypeOfVehicle.Airplane), "Id", "Id", TypeOfVehicle.Airplane);
             }
             else if (typeOfVehicle.ToUpper() == TypeOfVehicle.Motorcycle.ToString().ToUpper())
             {
-                ViewBag.TypeOfVehicle = TypeOfVehicle.Motorcycle.ToString();
+                //ViewBag.TypeOfVehicle = TypeOfVehicle.Motorcycle.ToString();
                 ViewBag.NyttFordon = "ny motorcykel";
                 ViewBag.ParkeraFordon = "motorcykeln";
+                ViewBag.AntalHjul = 2;
+                //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle).Where(tv => tv.TypeOfVehicle == TypeOfVehicle.Motorcycle), "Id", "Id");
             }
             else
             {
-                ViewBag.TypeOfVehicle = typeOfVehicle;
+                //ViewBag.TypeOfVehicle = typeOfVehicle;
                 ViewBag.NyttFordon = "nytt fordon";
                 ViewBag.ParkeraFordon = "fordonet";
+                //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle), "Id", "Id", "");
             }
             return View();
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Park([Bind(Include = "Id,VehicleType.TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] Vehicle vehicle)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Vehicles.Add(vehicle);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
+        //    ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+
+        //    return View(vehicle);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Park([Bind(Include = "Id,VehicleType.TypeOfVehicle,RegNumber,Color,NoOfWheels,Brand,Model")] Vehicle vehicle)
+        public ActionResult Park([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,MemberId,VehicleTypeId")] Vehicle vehicle, [Bind(Include = "Id,TypeOfVehicle")] VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {
                 db.Vehicles.Add(vehicle);
+                db.VehicleTypes.Add(vehicleType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+            //ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
 
             return View(vehicle);
         }
 
-
         // GET: Vehicles/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string typeOfVehicle = "Vehicle")
         {
             if (id == null)
             {
@@ -283,11 +383,12 @@ namespace Garage2._0.Controllers
                 return HttpNotFound();
             }
             ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleType.TypeOfVehicle);
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle), "Id", "Id", vehicle.VehicleType.TypeOfVehicle);
             return View(vehicle);
         }
 
-        // POST: Vehicles/Edit/5
+        //POST: Vehicles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -300,10 +401,24 @@ namespace Garage2._0.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+            //ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
+
+        //public ActionResult Edit([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model")] Vehicle vehicle, [Bind(Include = "Id,MemberId")] Member member) //,CheckInTime ,MemberId, VehicleTypeId" , [Bind(Include = "Id,TypeOfVehicle")]] VehicleType vehicleType
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(member).State = EntityState.Modified;
+        //        db.Entry(vehicle).State = EntityState.Modified;
+
+        //        db.SaveChanges();
+               
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(vehicle);
+        //}
 
         // GET: Vehicles/Delete/5
         public ActionResult Delete(int? id)

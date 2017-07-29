@@ -65,11 +65,19 @@
             </div>
         </div>
 
+        @*@Html.HiddenFor(model => model.VehicleTypeId)*@
         <div class="form-group">
-            @Html.LabelFor(model => model.VehicleTypeId, "VehicleTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @*@Html.LabelFor(model => model.VehicleTypeId, "VehicleTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("VehicleTypeId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VehicleTypeId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.VehicleType, "", new { @class = "text-danger" })
+            </div>*@
+
+            @Html.LabelFor(model => model.VehicleTypeId, "Välj fordonstyp", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.VehicleType.TypeOfVehicle, "", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VehicleType.TypeOfVehicle, "", new { @class = "text-danger" })
             </div>
         </div>
 

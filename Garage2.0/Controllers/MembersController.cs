@@ -37,25 +37,27 @@ namespace Garage2._0.Controllers
 
         public ActionResult Index(string option, string search)
         {
-            var member = from m in db.Members select m;
+            var members = db.Members; //.Include(m => m.Vehicles);
+
             if (option == "Name")
             {
                 if (!String.IsNullOrEmpty(search))
                 {
-                    member = member.Where(p => p.Name.StartsWith(search));
+                    var member = members.Where(p => p.Name.StartsWith(search));
                     return View(member);
                 }
-                return View(db.Members.ToList());
+                //return View(db.Members.Include(m => m.Vehicles).ToList());
             }
             else
             {
                 if (!String.IsNullOrEmpty(search))
                 {
-                    member = member.Where(p => p.Membershipnumber.StartsWith(search));
+                    var member = members.Where(p => p.Membershipnumber.StartsWith(search));
                     return View(member);
                 }
-                return View(db.Members.ToList());
+                //return View(db.Members.Include(m => m.Vehicles).ToList());
             }
+            return View(members.ToList());
         }
 
 
@@ -148,6 +150,11 @@ namespace Garage2._0.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Member member = db.Members.Find(id);
+
+            foreach (var vehicle in member.Vehicles) //<-------fordonen bort också!
+            {
+                db.Vehicles.Remove(vehicle);
+            }
             db.Members.Remove(member);
             db.SaveChanges();
             return RedirectToAction("Index");

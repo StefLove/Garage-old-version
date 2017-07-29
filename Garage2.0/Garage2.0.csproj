@@ -156,6 +156,10 @@
     <Compile Include="Migrations\201706271232542_DateFormatInVehicleBase.Designer.cs">
       <DependentUpon>201706271232542_DateFormatInVehicleBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707271747576_Enum.cs" />
+    <Compile Include="Migrations\201707271747576_Enum.Designer.cs">
+      <DependentUpon>201707271747576_Enum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -251,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706271232542_DateFormatInVehicleBase.resx">
       <DependentUpon>201706271232542_DateFormatInVehicleBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707271747576_Enum.resx">
+      <DependentUpon>201707271747576_Enum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

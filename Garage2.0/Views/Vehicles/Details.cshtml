@@ -14,7 +14,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Member.Name)
+            @Html.ActionLink(linkText: Model.Member.Name, actionName: "Index", controllerName: "Vehicles", routeValues: new { memberId = Model.MemberId }, htmlAttributes: new { title = "Alla fordon tillhörande " + Model.Member.Name })
+            @*@Html.DisplayFor(model => model.Member.Name)*@
         </dd>
 
         @*<dt>
@@ -30,7 +31,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.VehicleType.TypeOfVehicle)
+            @*@Html.DisplayFor(model => model.VehicleType.TypeOfVehicle)*@
+            @ViewBag.Fordonstyp
         </dd>
 
         <dt>

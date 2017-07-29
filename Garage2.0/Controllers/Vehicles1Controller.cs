@@ -40,8 +40,10 @@ namespace Garage2._0.Controllers
         // GET: Vehicles1/Create
         public ActionResult Create()
         {
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name");
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id");
+            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", 0);
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", null);
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle), "Id", "Id", "");
+
             return View();
         }
 
@@ -50,17 +52,19 @@ namespace Garage2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,MemberId,VehicleTypeId")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,RegNumber,Color,NoOfWheels,Brand,Model,CheckInTime,MemberId,VehicleTypeId")] Vehicle vehicle, [Bind(Include = "Id,TypeOfVehicle")] VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {
                 db.Vehicles.Add(vehicle);
+                db.VehicleTypes.Add(vehicleType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+            //ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+
             return View(vehicle);
         }
 
@@ -77,7 +81,12 @@ namespace Garage2._0.Controllers
                 return HttpNotFound();
             }
             ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+            //bearbeta listan här 
+            //var vehicleTypes = db.VehicleTypes.Select(vt => vt.TypeOfVehicle).ToList(); //<----------
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "TypeOfVehicle", "TypeOfVehicle", vehicle.VehicleType.TypeOfVehicle); //<-------- db.VehicleTypes
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "TypeOfVehicle", vehicle.VehicleTypeId); //TypeOfVehicle
+            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle), "Id", "Id", vehicle.VehicleTypeId);
+
             return View(vehicle);
         }
 
@@ -94,8 +103,8 @@ namespace Garage2._0.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
+            //ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId) ;
+            //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 

@@ -25,6 +25,7 @@ namespace Garage2._0.Models
         public int Id { get; set; }
 
         [Display(Name = "Fordonstyp")]
+        [EnumDataType(typeof(TypeOfVehicle))] //<------------------tillagt
         public TypeOfVehicle TypeOfVehicle { get; set; }
 
         public virtual ICollection<Vehicle> Vehicles { get; set; }

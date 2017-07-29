@@ -1,14 +1,13 @@
 ﻿@model Garage2._0.Models.Member
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Avregistrering av" + Model.Name;
 }
 
-<h2>Avregistrera</h2>
+<h2>@ViewBag.Title</h2>
 
-<h3>Är du säker att medlemen ska tas bort?</h3>
+<h3 class="hidden-print">Är du säker på att @Model.Name ska avregistreras som medlem?</h3>
 <div>
-    @*<h4>Member</h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -48,8 +47,8 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Verkställ" class="btn btn-default" /> |
+        <div class="form-actions no-color hidden-print">
+            <input type="submit" value="Verkställ" class="btn btn-danger" /> |
             @Html.ActionLink("Tillbaka till listan", "Index")
         </div>
     }
