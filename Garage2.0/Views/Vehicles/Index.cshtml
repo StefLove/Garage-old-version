@@ -34,7 +34,7 @@
         @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Motorcycle" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
     }
     else
-    {   
+    {
         @Html.ActionLink("Parkera nytt fordon i garaget", "Park", new { memberId = ViewBag.MemberId }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
     }
 </p>
@@ -57,14 +57,14 @@
     <table class="table">
         <tr>
     @if (string.IsNullOrEmpty(ViewBag.MemberName))
-            {
+    {
         <th> 
             @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.MemberName).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" }, htmlAttributes: new { title = "Sortera" })
         </th>
     }
 
     @if (ViewBag.TypeOfVehicle.Equals(""))
-            {
+    {
         <th>
             @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
@@ -76,9 +76,12 @@
     <th>
         @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
     </th>
-    <th class="hidden-print"></th>
+    <th class="hidden-print">
+        @Html.ActionLink(linkText: "Detaljerad fordonslista", actionName: "DetailedIndex", routeValues: new { typeOfVehicle = ViewBag.TypeOfVehicle, memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Klicka" })
+    </th>
 </tr>
-@foreach (var item in Model)
+@{var orderedModel = Model.OrderBy(m => m.MemberName).ToList();}
+@foreach (var item in orderedModel)
 {
     <tr>
         @if (string.IsNullOrEmpty(ViewBag.MemberName))
@@ -122,9 +125,9 @@
             @Html.DisplayFor(modelItem => item.CheckInTime)
         </td>
         <td class="hidden-print">
-            @Html.ActionLink("Ändra", "Edit", new { id = item.Id }, new { typeOfVehicle = ViewBag.TypeOfVehicle }) |
-            @Html.ActionLink("Fordonsdetaljer", "Details", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle }) |
-            @Html.ActionLink("Checka ut", "Delete", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle })
+            @Html.ActionLink("Ändra fordonsuppgifter", "Edit", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle }, htmlAttributes: new { title = "om " + item.RegNumber}) |
+            @Html.ActionLink("Fordonsdetaljer", "Details", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle }, htmlAttributes: new { title = "om " + item.RegNumber }) |
+            @Html.ActionLink("Checka ut", "Delete", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle }, htmlAttributes: new { title = item.RegNumber })
         </td>
     </tr>
             }

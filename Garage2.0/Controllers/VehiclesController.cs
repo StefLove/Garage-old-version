@@ -371,8 +371,10 @@ namespace Garage2._0.Controllers
         }
 
         // GET: Vehicles/Edit/5
-        public ActionResult Edit(int? id, string typeOfVehicle = "Vehicle")
+        public ActionResult Edit(int? id, string typeOfVehicle = "Fordon")
         {
+            ViewBag.Fordonstyp = typeOfVehicle;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

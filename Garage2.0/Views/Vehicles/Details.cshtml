@@ -15,7 +15,6 @@
 
         <dd>
             @Html.ActionLink(linkText: Model.Member.Name, actionName: "Index", controllerName: "Vehicles", routeValues: new { memberId = Model.MemberId }, htmlAttributes: new { title = "Alla fordon tillhörande " + Model.Member.Name })
-            @*@Html.DisplayFor(model => model.Member.Name)*@
         </dd>
 
         @*<dt>
@@ -86,6 +85,6 @@
     </dl>
 </div>
 <p class="hidden-print">
-   @Html.ActionLink("Ändra fordonsuppgifter", "Edit", new { id = Model.Id }) |
-   @Html.ActionLink("Tillbaka till garaget", "Index")
+   @Html.ActionLink("Ändra fordonsuppgifter", "Edit", new { id = Model.Id, typeOfVehicle = ViewBag.Fordonstyp }, new { title = "Klicka" }) |
+   @Html.ActionLink("Tillbaka till garaget", "Index", null, new { title = "Klicka" })
 </p>

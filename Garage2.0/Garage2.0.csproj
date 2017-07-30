@@ -132,7 +132,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
-    <Compile Include="Controllers\Vehicles1Controller.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="DataAccess\GarageContext.cs" />
@@ -222,11 +221,6 @@
     <Content Include="Views\Vehicles\Edit.cshtml" />
     <Content Include="Views\Vehicles\Index.cshtml" />
     <Content Include="Views\Vehicles\DetailedIndex.cshtml" />
-    <Content Include="Views\Vehicles1\Create.cshtml" />
-    <Content Include="Views\Vehicles1\Delete.cshtml" />
-    <Content Include="Views\Vehicles1\Details.cshtml" />
-    <Content Include="Views\Vehicles1\Edit.cshtml" />
-    <Content Include="Views\Vehicles1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,7 +14,6 @@
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Name) <br />*@
             @Html.ActionLink(linkText: Model.Name, actionName: "Index", controllerName: "Vehicles", routeValues: new { memberId = Model.Id }, htmlAttributes: new { title = "Alla fordon tillhörande " + Model.Name })
         </dd>
 
@@ -50,8 +49,9 @@
             <dd>
                 @Model.Vehicles.Count() <text>st. med regnummer: </text><br />
                 @using Garage2._0.Models
-                @{
-                    foreach (var vehicle in Model.Vehicles)
+                @{  
+                    var orderedVehicles = Model.Vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle);
+                    foreach (var vehicle in orderedVehicles)
                     {
                         if (vehicle.VehicleType.TypeOfVehicle.ToString() == "Car")
                         {
@@ -74,7 +74,7 @@
                         {
                             <text>Motorcykel: </text>
                         }
-         
+
                         @Html.ActionLink(linkText: vehicle.RegNumber, actionName: "Details", controllerName: "Vehicles", routeValues: new { id = vehicle.Id }, htmlAttributes: new { title = "Fordonsdetaljer"} ) <br />
                     }
                 }
@@ -84,6 +84,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Ändra", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Tillbaka till ägarlistan", "Index")
+    @Html.ActionLink("Ändra", "Edit", new { id = Model.Id }, new { title = "Klicka"}) |
+    @Html.ActionLink("Tillbaka till medlemsregistret", "Index", null, new { title = "Klicka" })
 </p>

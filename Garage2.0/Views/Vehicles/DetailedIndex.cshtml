@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Garage2._0.Models.Vehicle>
 
 @{
-    ViewBag.Title = ViewBag.NoOfParkedVehicles+ " " + HttpUtility.HtmlDecode(ViewBag.Fordon) + " i garaget";/* <--singularis!! */
+    ViewBag.Title = ViewBag.NoOfParkedVehicles + " " + HttpUtility.HtmlDecode(ViewBag.Fordon) + " i garaget";/* <--singularis!! */
 }
 
 <h2>
@@ -11,33 +11,6 @@
     }
     @ViewBag.Title
 </h2>
-
-@*<p class="hidden-print">
-    @if (ViewBag.Fordon.Equals("bilar"))
-    {
-        @Html.ActionLink("Parkera ny bil i garaget", "Park", new { typeOfVehicle = "Car" });
-    }
-    else if (ViewBag.Fordon.Equals("bussar"))
-    {
-        @Html.ActionLink("Parkera ny buss i garaget", "Park", new { typeOfVehicle = "Bus" });
-    }
-    else if (ViewBag.Fordon.Equals("baatar"))
-    {
-        @Html.ActionLink("Parkera ny båt i garaget", "Park", new { typeOfVehicle = "Boat" });
-    }
-    else if (ViewBag.Fordon.Equals("flygplan"))
-    {
-        @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { typeOfVehicle = "Airplane" });
-    }
-    else if (ViewBag.Fordon.Equals("motorcyklar"))
-    {
-        @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { typeOfVehicle = "Motorcycle" });
-    }
-    else
-    {
-        @Html.ActionLink("Parkera nytt fordon i garaget", "Park");
-    }
-</p>*@
 
 <p class="hidden-print">
     @if (ViewBag.Fordon.StartsWith("bil"))
@@ -82,44 +55,53 @@
 
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Member.Name).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" }, htmlAttributes: new { title = "Sortera" })
-        </th>       
+        </th>*@ 
+        @if (string.IsNullOrEmpty(ViewBag.MemberName))
+        {
+            <th>
+                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Member.Name).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" }, htmlAttributes: new { title = "Sortera" })
+            </th>
+        }
             @if (ViewBag.TypeOfVehicle.Equals(""))
-            { 
+            {
                 <th>
-                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle" }, htmlAttributes: new { title = "Sortera" })
+                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.VehicleType).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "TypeOfVehicle", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
                 </th>
             }
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber" }, htmlAttributes: new { title = "Sortera" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.RegNumber).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "RegNumber", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Color).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Color" }, htmlAttributes: new { title = "Sortera" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Color).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Color", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.NoOfWheels).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "NoOfWheels" }, htmlAttributes: new { title = "Sortera" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.NoOfWheels).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "NoOfWheels", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Brand).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Brand" }, htmlAttributes: new { title = "Sortera" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Brand).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Brand", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Model).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Model" }, htmlAttributes: new { title = "Sortera" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Model).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "Model", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
         <th>
-            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime" }, htmlAttributes: new { title = "Sortera" })
+            @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
-        <th class="hidden-print"></th>
+        <th class="hidden-print">
+            @Html.ActionLink(linkText: "Enkel fordonslista", actionName: "Index", routeValues: new { typeOfVehicle = ViewBag.TypeOfVehicle, memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Klicka" })
+        </th>
     </tr>
-    @if (Model?.Count() > 0)
-    {
-        foreach (var item in Model)
-        {
+    @*@if (Model?.Count() > 0)
+    {*@
+            @{ var orderedModel = Model.OrderBy(m => m.Member.Name).ToList(); }
+            @foreach (var item in orderedModel)
+            {
             <tr>
                 @if (string.IsNullOrEmpty(ViewBag.MemberName))
                 {
                     <td>
-                        @Html.ActionLink(linkText: item.Member.Name, actionName: "DetailedIndex", controllerName: "Vehicles", routeValues: new { memberName = item.Member.Name }, htmlAttributes: new { title = "Alla fordon tillhörande " + item.Member.Name })
+                        @Html.ActionLink(linkText: item.Member.Name, actionName: "DetailedIndex", controllerName: "Vehicles", routeValues: new { memberId = item.Member.Id }, htmlAttributes: new { title = "Alla fordon tillhörande " + item.Member.Name })
                     </td>
                 }
                     @using Garage2._0.Models
@@ -129,23 +111,23 @@
                             <td>
                                 @if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Car)
                                 {
-                                    @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "DetailedIndex", new { typeOfVehicle = "Car" }, htmlAttributes: new { title = "Välj bilar" })
+                                    @Html.ActionLink(HttpUtility.HtmlDecode("Bil"), "DetailedIndex", new { typeOfVehicle = "Car", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Välj bilar" })
                                 }
                                 else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Bus)
                                 {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "DetailedIndex", new { typeOfVehicle = "Bus" }, htmlAttributes: new { title = "Välj bussar" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Buss"), "DetailedIndex", new { typeOfVehicle = "Bus", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Välj bussar" })
                                 }
                                 else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Boat)
                                 {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "DetailedIndex", new { typeOfVehicle = "Boat" }, htmlAttributes: new { title = "Välj båtar" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Båt"), "DetailedIndex", new { typeOfVehicle = "Boat", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Välj båtar" })
                                 }
                                 else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Airplane)
                                 {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "DetailedIndex", new { typeOfVehicle = "Airplane" }, htmlAttributes: new { title = "Välj flygplan" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Flygplan"), "DetailedIndex", new { typeOfVehicle = "Airplane", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Välj flygplan" })
                                 }
                                 else if (item.VehicleType.TypeOfVehicle == TypeOfVehicle.Motorcycle)
                                 {
-                                @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "DetailedIndex", new { typeOfVehicle = "Motorcycle" }, htmlAttributes: new { title = "Välj motorcyklar" })
+                                @Html.ActionLink(HttpUtility.HtmlDecode("Motorcykel"), "DetailedIndex", new { typeOfVehicle = "Motorcycle", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Välj motorcyklar" })
                                 }
                             </td>
                         }
@@ -170,11 +152,11 @@
                     @Html.DisplayFor(modelItem => item.CheckInTime)
                 </td>
                 <td class="hidden-print">
-                    @Html.ActionLink("Ändra", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Fordonsdetaljer", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Checka ut", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Ändra fordonsuppgifter", "Edit", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle }, htmlAttributes: new { title = "om " + item.RegNumber }) |
+                    @Html.ActionLink("Fordonsdetaljer", "Details", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle }, htmlAttributes: new { title = "om " + item.RegNumber }) |
+                    @Html.ActionLink("Checka ut", "Delete", new { id = item.Id, typeOfVehicle = ViewBag.TypeOfVehicle }, htmlAttributes: new { title = item.RegNumber })
                 </td>
             </tr>
         }
-    }
+    @*}*@
 </table>

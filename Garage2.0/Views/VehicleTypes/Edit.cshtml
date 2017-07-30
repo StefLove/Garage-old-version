@@ -1,10 +1,10 @@
 ﻿@model Garage2._0.Models.VehicleType
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editera fordonstyp";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm())
@@ -34,7 +34,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tillbaka till listan", "Index")
 </div>
 
 @section Scripts {
