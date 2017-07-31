@@ -1,0 +1,55 @@
+﻿@model Garage.Models.Member
+
+@{
+    ViewBag.Title = "Avregistrering av " + Model.Name;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3 class="hidden-print">Är du säker på att denna medlem ska avregistreras?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Membershipnumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Membershipnumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phonenumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phonenumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color hidden-print">
+            <input type="submit" value="Avregistrera @Model.Membershipnumber" class="btn btn-danger" /> |
+            @Html.ActionLink("Tillbaka till medlemsregistret", "Index", null, new { title = "Klicka" })
+        </div>
+    }
+</div>

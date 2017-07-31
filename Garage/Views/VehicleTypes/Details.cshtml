@@ -1,0 +1,31 @@
+﻿@model Garage.Models.VehicleType
+
+@{
+    Garage.Models.Vehicle vehicle = Model.Vehicles.Where(v => v.Id == Model.Id).FirstOrDefault();
+    ViewBag.Title = "Detaljer om fordonstypen";
+}
+
+<h2>
+    @ViewBag.Title för fordonet<br />
+    med regnummer @Html.ActionLink(vehicle.RegNumber, "Details", "Vehicles", new { id = Model.Id }, new { title = "Detaljer" })
+</h2>
+
+<div>
+    <hr />
+
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfVehicle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfVehicle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Ändra fordonstypen", "Edit", new { id = Model.Id }, new { title = "Klicka" }) |
+    @Html.ActionLink("Till fordonstypslistan", "Index", null, new { title = "Klicka" })
+</p>
