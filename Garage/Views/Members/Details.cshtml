@@ -7,7 +7,8 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-    <hr />
+    <hr style="border-color:darkblue; background-color:darkblue;"/>
+
     <dl class="dl-horizontal">
 
         <dt>
@@ -87,7 +88,8 @@
 }
     </dl>
 </div>
-<p>
+<p class="hidden-print">
     @Html.ActionLink("Ändra medlemsdata", "Edit", new { id = Model.Id }, new { title = "för " + Model.Membershipnumber }) |
-    @Html.ActionLink("Till medlemsregistret", "Index", null, new { title = "Klicka" })
+    @Html.ActionLink("Till medlemsregistret", "Index", null, new { title = "Klicka" }) |
+    @Html.ActionLink(linkText: "Parkera fordon", actionName: "Park", controllerName: "Vehicles", routeValues: new { memberId = Model.Id }, htmlAttributes: new { title = "tillhörande medlem " + Model.Membershipnumber })
 </p>

@@ -10,9 +10,12 @@ namespace Garage.Models
     {
         public int Id { get; set; }
 
+
+        public int MemberId { get; set; }
+
         [Display(Name = "Ägare")]
-        //[Required(ErrorMessage = "{0} måste anges!")]
         //[StringLength(100)]
+        //[Required(ErrorMessage = "{0} måste anges!")]
         public string MemberName { get; set; }
 
         [Display(Name = "Fordonstyp")]
@@ -20,8 +23,8 @@ namespace Garage.Models
         public string VehicleType { get; set; }
 
         [Display(Name = "Registeringsnummer")]
-        //[Required(ErrorMessage = "{0} måste anges!")]
         //[StringLength(16)]
+        //[Required(ErrorMessage = "{0} måste anges!")]
         public string RegNumber { get; set; }
 
         [Display(Name = "Check-in tid")]

@@ -13,6 +13,8 @@
     @ViewBag.Title
 </h2>
 
+@if (!string.IsNullOrEmpty(ViewBag.MemberName))
+{
 <p class="hidden-print">
     @if (ViewBag.Fordon.StartsWith("bil"))
     {
@@ -39,6 +41,7 @@
         @Html.ActionLink("Parkera nytt fordon i garaget", "Park", new { memberId = ViewBag.MemberId }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
     }
 </p>
+}
 
 <div>
     <form method="GET" action="/Vehicles/Index" class="hidden-print">
@@ -51,7 +54,7 @@
             <option selected="@ViewBag.TypeOfVehicle.Equals("Airplane")" value="Airplane">flygplan</option>
             <option selected="@ViewBag.TypeOfVehicle.Equals("Motorcycle")" value="Motorcycle">motorcyklar</option>
         </select> i garaget.
-        <input name="memberId" type="hidden" value="@ViewBag.MemberId" />
+        @*<input name="memberId" type="hidden" value="@ViewBag.MemberId" />*@
     </form>
 </div><br />
 
@@ -60,7 +63,7 @@
         @if (string.IsNullOrEmpty(ViewBag.MemberName))
         {
             <th>
-                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.MemberName).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" }, htmlAttributes: new { title = "Sortera" })
+                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.MemberId).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" }, htmlAttributes: new { title = "Sortera" })
             </th>
         }
 
@@ -78,7 +81,7 @@
             @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.CheckInTime).ToString()), "Index", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "CheckInTime", memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Sortera" })
         </th>
         <th class="hidden-print">
-            @Html.ActionLink(linkText: "Detaljerad fordonslista", actionName: "DetailedIndex", routeValues: new { typeOfVehicle = ViewBag.TypeOfVehicle, memberId = ViewBag.MemberId }, htmlAttributes: new { title = "Klicka" })
+            @Html.ActionLink(linkText: "Detaljerad fordonslista", actionName: "DetailedIndex", routeValues: new { typeOfVehicle = ViewBag.TypeOfVehicle, memberId = ViewBag.MemberId, orderBy = ViewBag.orderBy }, htmlAttributes: new { title = "Klicka" })
         </th>
     </tr>
 
@@ -90,7 +93,7 @@
                 @if (string.IsNullOrEmpty(ViewBag.MemberName))
                 {
                     <td>
-                        @Html.ActionLink(linkText: item.MemberName, actionName: "Index", controllerName: "Vehicles", routeValues: new { memberName = item.MemberName }, htmlAttributes: new { title = "Alla fordon tillhörande " + item.MemberName })
+                        @Html.ActionLink(linkText: item.MemberName, actionName: "Index", controllerName: "Vehicles", routeValues: new { memberId = item.MemberId }, htmlAttributes: new { title = "Alla fordon tillhörande medlem " + item.MemberId })
                     </td>
                 }
                 @using Garage.Models

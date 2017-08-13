@@ -23,7 +23,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tjänster<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                @*<li><a href="~-/Members/Index">Medlemmar</a></li>*@
+                                @*<li><a href="~/Members/Index">Medlemmar</a></li>*@
                                 <li>@Html.ActionLink("Medlemmar", "Index", "Members")</li>
                                 <li>@Html.ActionLink("Fordonsöversikt", "Index", "Vehicles")</li>
                                 <li>@Html.ActionLink("Detaljerad fordonsöversikt", "DetailedIndex", "Vehicles")</li>
@@ -37,7 +37,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr style="border-color:darkblue; background-color:darkblue;"/>
         <footer>
             <p>&copy; @DateTime.Now - Garage</p><br />
             <p>

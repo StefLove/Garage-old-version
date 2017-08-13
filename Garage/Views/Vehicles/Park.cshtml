@@ -11,11 +11,13 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
+
+        <hr style="border-color:darkblue; background-color:darkblue;"/>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MemberId, "Välj ägare", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MemberId, "Ägare", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("MemberId", null, "", htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })

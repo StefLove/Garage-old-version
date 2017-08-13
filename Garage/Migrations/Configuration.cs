@@ -28,14 +28,14 @@ namespace Garage.Migrations
                 new Member { Name = "Karl", Membershipnumber = "1811", Phonenumber = "077 555 667", Address = "City" },
                 new Member { Name = "Lena", Membershipnumber = "6734", Phonenumber = "070 555 686", Address = "City" },
                 new Member { Name = "Lida", Membershipnumber = "3426", Phonenumber = "070 555 866", Address = "City" },
-                new Member { Name = "Carl", Membershipnumber = "4652", Phonenumber = "070 558 666", Address = "City" },
-                new Member { Name = "Flin", Membershipnumber = "3267", Phonenumber = "070 585 666", Address = "City" },
-                new Member { Name = "Alex", Membershipnumber = "1287", Phonenumber = "070 955 666", Address = "City" },
-                new Member { Name = "Gerd", Membershipnumber = "8833", Phonenumber = "070 595 666", Address = "City" },
-                new Member { Name = "Jana", Membershipnumber = "5566", Phonenumber = "070 559 666", Address = "City" },
-                new Member { Name = "Kent", Membershipnumber = "5432", Phonenumber = "070 555 966", Address = "City" },
-                new Member { Name = "Anna", Membershipnumber = "4567", Phonenumber = "070 555 696", Address = "City" },
-                new Member { Name = "Bert", Membershipnumber = "1234", Phonenumber = "070 555 669", Address = "Alby" }
+                //new Member { Name = "Carl", Membershipnumber = "4652", Phonenumber = "070 558 666", Address = "City" },
+                //new Member { Name = "Flin", Membershipnumber = "3267", Phonenumber = "070 585 666", Address = "City" },
+                //new Member { Name = "Alex", Membershipnumber = "1287", Phonenumber = "070 955 666", Address = "City" },
+                //new Member { Name = "Gerd", Membershipnumber = "8833", Phonenumber = "070 595 666", Address = "City" },
+                //new Member { Name = "Jana", Membershipnumber = "5566", Phonenumber = "070 559 666", Address = "City" },
+                //new Member { Name = "Kent", Membershipnumber = "5432", Phonenumber = "070 555 966", Address = "City" },
+                //new Member { Name = "Anna", Membershipnumber = "4567", Phonenumber = "070 555 696", Address = "City" },
+                //new Member { Name = "Bert", Membershipnumber = "1234", Phonenumber = "070 555 669", Address = "Alby" }
             };
 
             members.ForEach(m => context.Members.AddOrUpdate(m));

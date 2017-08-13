@@ -30,7 +30,7 @@ namespace Garage.Controllers
             }
             else if (!string.IsNullOrEmpty(memberName))
             {
-                ViewBag.MemberId = db.Members.ToList().Find(m => m.Name == memberName).Id;
+                ViewBag.MemberId = db.Members.ToList().Find(m => m.Name == memberName).Id; //<----------------
                 ViewBag.MemberName = memberName;
                 //ViewBag.MedlemHar = memberName + " har ";
                 vehicles = vehicles.Where(v => v.Member.Name == memberName);
@@ -80,11 +80,12 @@ namespace Garage.Controllers
             if (orderBy != "")
                 switch (orderBy.ToUpper())
                 {
-                    case "MEMBERNAME": vehicles = vehicles.OrderBy(v => v.Member.Name); break;
-                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
-                    case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
-                    case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); break;
+                    case "MEMBERNAME": vehicles = vehicles.OrderBy(v => v.Member.Name); /*ViewBag.orderBy = "MemberName";*/  break;
+                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); ViewBag.orderBy = "TypeOfVehicle"; break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
+                    case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); ViewBag.orderBy = "RegNumber"; break;
+                    case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); ViewBag.orderBy = "CheckInTime"; break;
                 }
+            else vehicles = vehicles.OrderBy(v => v.Member.Name);
 
             List<VehicleBase> vehicleBaseList = new List<VehicleBase>();
 
@@ -95,6 +96,7 @@ namespace Garage.Controllers
                     var vehicleBase = new VehicleBase();
                     vehicleBase.Id = vehicle.Id;
                     vehicleBase.MemberName = vehicle.Member.Name;
+                    vehicleBase.MemberId = vehicle.Member.Id;
                     vehicleBase.VehicleType = vehicle.VehicleType.TypeOfVehicle.ToString();
                     vehicleBase.RegNumber = vehicle.RegNumber;
                     vehicleBase.CheckInTime = vehicle.CheckInTime;
@@ -104,7 +106,7 @@ namespace Garage.Controllers
 
             ViewBag.NoOfParkedVehicles = vehicles.Count();
 
-            return View(vehicleBaseList.OrderBy(v => v.MemberName));
+            return View(vehicleBaseList);
         }
 
 
@@ -170,15 +172,16 @@ namespace Garage.Controllers
             if (!string.IsNullOrEmpty(orderBy))
                 switch (orderBy.ToUpper())
                 {
-                    case "MEMBERNAME": vehicles = vehicles.OrderBy(v => v.Member.Name); break;
-                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
-                    case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); break;
+                    case "MEMBERNAME": vehicles = vehicles.OrderBy(v => v.Member.Name); /*ViewBag.orderBy = "MemberName";*/ break;
+                    case "TYPEOFVEHICLE": vehicles = vehicles.OrderBy(v => v.VehicleType.TypeOfVehicle); ViewBag.orderBy = "TypeOfVehicle"; break; //.TypeOfVehicle tillagt (annars blir det fel!) /Stefan 2017-06-27
+                    case "REGNUMBER": vehicles = vehicles.OrderBy(v => v.RegNumber); ViewBag.orderBy = "RegNumber"; break;
                     case "COLOR": vehicles = vehicles.OrderBy(v => v.Color); break;
                     case "NOOFWHEELS": vehicles = vehicles.OrderBy(v => v.NoOfWheels); break;
                     case "BRAND": vehicles = vehicles.OrderBy(v => v.Brand); break;
                     case "MODEL": vehicles = vehicles.OrderBy(v => v.Model); break;
-                    case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); break;
+                    case "CHECKINTIME": vehicles = vehicles.OrderBy(v => v.CheckInTime); ViewBag.orderBy = "CheckInTime"; break;
                 }
+            else vehicles = vehicles.OrderBy(v => v.Member.Name);
 
             if (!String.IsNullOrEmpty(searchNumberPlate))
             {
@@ -189,7 +192,7 @@ namespace Garage.Controllers
 
             if (vehicles.Count() > 0)
             {
-                return View(vehicles.OrderBy(v => v.Member.Name).ToList());
+                return View(vehicles.ToList());
             }
             return View();
         }
