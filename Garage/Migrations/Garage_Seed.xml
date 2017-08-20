@@ -1,0 +1,355 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Microsoft Corporation</Author>
+  <LastAuthor>Stefan L</LastAuthor>
+  <Created>1996-11-28T13:12:19Z</Created>
+  <LastSaved>2017-08-20T23:24:01Z</LastSaved>
+  <Version>11.9999</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>4500</WindowHeight>
+  <WindowWidth>9420</WindowWidth>
+  <WindowTopX>120</WindowTopX>
+  <WindowTopY>135</WindowTopY>
+  <ActiveSheet>2</ActiveSheet>
+  <AcceptLabelsInFormulas/>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+  <DisplayInkNotes>False</DisplayInkNotes>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s21">
+   <NumberFormat ss:Format="@"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Medlemmar">
+  <Table ss:ExpandedColumnCount="4" ss:ExpandedRowCount="9" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s21">
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="68.25"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="81"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="71.25"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="66"/>
+   <Row>
+    <Cell><Data ss:Type="String">Namn</Data></Cell>
+    <Cell><Data ss:Type="String">Medlemsnummer</Data></Cell>
+    <Cell><Data ss:Type="String">Telefonnummer</Data></Cell>
+    <Cell><Data ss:Type="String">Adress</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Archbald</Data></Cell>
+    <Cell><Data ss:Type="String">1211</Data></Cell>
+    <Cell><Data ss:Type="String">071 555 666</Data></Cell>
+    <Cell><Data ss:Type="String">Solna</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Victoria</Data></Cell>
+    <Cell><Data ss:Type="String">1131</Data></Cell>
+    <Cell><Data ss:Type="String">072 555 666</Data></Cell>
+    <Cell><Data ss:Type="String">Täby</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Madeleine</Data></Cell>
+    <Cell><Data ss:Type="Number">1151</Data></Cell>
+    <Cell><Data ss:Type="String">073 555 666</Data></Cell>
+    <Cell><Data ss:Type="String">Stockholm</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Carl Philip</Data></Cell>
+    <Cell><Data ss:Type="Number">1611</Data></Cell>
+    <Cell><Data ss:Type="String">076 555 666</Data></Cell>
+    <Cell><Data ss:Type="String">Stockholm</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Carl Gustaf</Data></Cell>
+    <Cell><Data ss:Type="Number">1811</Data></Cell>
+    <Cell><Data ss:Type="String">077 555 667</Data></Cell>
+    <Cell><Data ss:Type="String">Ekerö</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Madeleine</Data></Cell>
+    <Cell><Data ss:Type="Number">6734</Data></Cell>
+    <Cell><Data ss:Type="String">070 555 686</Data></Cell>
+    <Cell><Data ss:Type="String">Lidingö</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Victoria</Data></Cell>
+    <Cell><Data ss:Type="Number">3426</Data></Cell>
+    <Cell><Data ss:Type="String">070 555 866</Data></Cell>
+    <Cell><Data ss:Type="String">Solna</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Anna Lena</Data></Cell>
+    <Cell><Data ss:Type="String">1326</Data></Cell>
+    <Cell><Data ss:Type="String">069 555 866</Data></Cell>
+    <Cell><Data ss:Type="String">Sundbyberg</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996"
+     x:Right="0.78740157499999996" x:Top="0.984251969"/>
+   </PageSetup>
+   <Print>
+    <ValidPrinterInfo/>
+    <PaperSizeIndex>9</PaperSizeIndex>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>10</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Fordonstyp">
+  <Table ss:ExpandedColumnCount="2" ss:ExpandedRowCount="14" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s21">
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="42.75"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="63.75"/>
+   <Row>
+    <Cell><Data ss:Type="String">Id</Data></Cell>
+    <Cell><Data ss:Type="String">TypAvFordon</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">bil</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">2</Data></Cell>
+    <Cell><Data ss:Type="String">bil</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">3</Data></Cell>
+    <Cell><Data ss:Type="String">bil</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+    <Cell><Data ss:Type="String">buss</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5</Data></Cell>
+    <Cell><Data ss:Type="String">båt</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">6</Data></Cell>
+    <Cell><Data ss:Type="String">flygplan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7</Data></Cell>
+    <Cell><Data ss:Type="String">bil</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">8</Data></Cell>
+    <Cell><Data ss:Type="String">motorcykel</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">9</Data></Cell>
+    <Cell><Data ss:Type="String">flygplan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">10</Data></Cell>
+    <Cell><Data ss:Type="String">buss</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">11</Data></Cell>
+    <Cell><Data ss:Type="String">båt</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">12</Data></Cell>
+    <Cell><Data ss:Type="String">flygplan</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">13</Data></Cell>
+    <Cell><Data ss:Type="String">flygplan</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996"
+     x:Right="0.78740157499999996" x:Top="0.984251969"/>
+   </PageSetup>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>14</ActiveRow>
+     <ActiveCol>4</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Fordon">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="14" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s21">
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="66"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="71.25"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="85.5"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="55.5"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="49.5"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="53.25"/>
+   <Column ss:StyleID="s21" ss:AutoFitWidth="0" ss:Width="51.75"/>
+   <Row>
+    <Cell><Data ss:Type="String">FordonstypId</Data></Cell>
+    <Cell><Data ss:Type="String">RegNummer</Data></Cell>
+    <Cell><Data ss:Type="String">Märke</Data></Cell>
+    <Cell><Data ss:Type="String">Modell</Data></Cell>
+    <Cell><Data ss:Type="String">Färg</Data></Cell>
+    <Cell><Data ss:Type="String">AntalHjul</Data></Cell>
+    <Cell><Data ss:Type="String">MedlemId</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+    <Cell><Data ss:Type="String">qsw098</Data></Cell>
+    <Cell><Data ss:Type="String">BMW</Data></Cell>
+    <Cell><Data ss:Type="String">520D</Data></Cell>
+    <Cell><Data ss:Type="String">svar</Data></Cell>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">2</Data></Cell>
+    <Cell><Data ss:Type="String">edc321</Data></Cell>
+    <Cell><Data ss:Type="String">FIAT</Data></Cell>
+    <Cell><Data ss:Type="String">500L</Data></Cell>
+    <Cell><Data ss:Type="String">gul</Data></Cell>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+    <Cell><Data ss:Type="String">1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">3</Data></Cell>
+    <Cell><Data ss:Type="String">aqr564</Data></Cell>
+    <Cell><Data ss:Type="String">VW</Data></Cell>
+    <Cell><Data ss:Type="String">Passat</Data></Cell>
+    <Cell><Data ss:Type="String">silver</Data></Cell>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+    <Cell><Data ss:Type="String">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+    <Cell><Data ss:Type="String">dsl675</Data></Cell>
+    <Cell><Data ss:Type="String">Scania</Data></Cell>
+    <Cell><Data ss:Type="String">DC13</Data></Cell>
+    <Cell><Data ss:Type="String">vit</Data></Cell>
+    <Cell><Data ss:Type="String">6</Data></Cell>
+    <Cell><Data ss:Type="String">2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5</Data></Cell>
+    <Cell><Data ss:Type="String">adk456</Data></Cell>
+    <Cell><Data ss:Type="String">Flipper</Data></Cell>
+    <Cell><Data ss:Type="String">F800R</Data></Cell>
+    <Cell><Data ss:Type="String">blå</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
+    <Cell><Data ss:Type="String">3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">6</Data></Cell>
+    <Cell><Data ss:Type="String">nab900</Data></Cell>
+    <Cell><Data ss:Type="String">Cessna</Data></Cell>
+    <Cell><Data ss:Type="String">402</Data></Cell>
+    <Cell><Data ss:Type="String">vit</Data></Cell>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7</Data></Cell>
+    <Cell><Data ss:Type="String">ghj789</Data></Cell>
+    <Cell><Data ss:Type="String">BMW</Data></Cell>
+    <Cell><Data ss:Type="String">F800R</Data></Cell>
+    <Cell><Data ss:Type="String">svart</Data></Cell>
+    <Cell><Data ss:Type="String">2</Data></Cell>
+    <Cell><Data ss:Type="String">4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">8</Data></Cell>
+    <Cell><Data ss:Type="String">ahj090</Data></Cell>
+    <Cell><Data ss:Type="String">Harley-Davidson</Data></Cell>
+    <Cell><Data ss:Type="String">500L</Data></Cell>
+    <Cell><Data ss:Type="String">gul</Data></Cell>
+    <Cell><Data ss:Type="String">2</Data></Cell>
+    <Cell><Data ss:Type="String">5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">9</Data></Cell>
+    <Cell><Data ss:Type="String">jbb007</Data></Cell>
+    <Cell><Data ss:Type="String">Concorde</Data></Cell>
+    <Cell><Data ss:Type="String">C33</Data></Cell>
+    <Cell><Data ss:Type="String">vit</Data></Cell>
+    <Cell><Data ss:Type="String">16</Data></Cell>
+    <Cell><Data ss:Type="String">6</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">10</Data></Cell>
+    <Cell><Data ss:Type="String">tur333</Data></Cell>
+    <Cell><Data ss:Type="String">Scania</Data></Cell>
+    <Cell><Data ss:Type="String">S2000</Data></Cell>
+    <Cell><Data ss:Type="String">vit</Data></Cell>
+    <Cell><Data ss:Type="String">8</Data></Cell>
+    <Cell><Data ss:Type="String">7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">11</Data></Cell>
+    <Cell><Data ss:Type="String">sne897</Data></Cell>
+    <Cell><Data ss:Type="String">Flipper</Data></Cell>
+    <Cell><Data ss:Type="String">F800R</Data></Cell>
+    <Cell><Data ss:Type="String">blå</Data></Cell>
+    <Cell><Data ss:Type="String">0</Data></Cell>
+    <Cell><Data ss:Type="String">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">12</Data></Cell>
+    <Cell><Data ss:Type="String">din999</Data></Cell>
+    <Cell><Data ss:Type="String">Cessna</Data></Cell>
+    <Cell><Data ss:Type="String">402</Data></Cell>
+    <Cell><Data ss:Type="String">vit</Data></Cell>
+    <Cell><Data ss:Type="String">2</Data></Cell>
+    <Cell><Data ss:Type="String">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">13</Data></Cell>
+    <Cell><Data ss:Type="String">qty555</Data></Cell>
+    <Cell><Data ss:Type="String">Boeing</Data></Cell>
+    <Cell><Data ss:Type="String">747</Data></Cell>
+    <Cell><Data ss:Type="String">vit</Data></Cell>
+    <Cell><Data ss:Type="String">20</Data></Cell>
+    <Cell><Data ss:Type="String">8</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996"
+     x:Right="0.78740157499999996" x:Top="0.984251969"/>
+   </PageSetup>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>1</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
