@@ -6,7 +6,7 @@
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 15p
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -130,11 +130,21 @@ th, tr, td {
     border-bottom-color: #999999;
 }
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    color:darkblue;
+    color: darkblue;
     text-decoration: none;
     background-color: lightgoldenrodyellow;
 }
-
+.disabled {
+    color: darkblue;
+    background-color: lightyellow;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-overflow: '';
+}
 @media print {
     a[href]:after {
         content: none /*!important*/;

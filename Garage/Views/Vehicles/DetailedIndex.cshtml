@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Garage.Models.Vehicle>
 
 @{
-    ViewBag.Title = ViewBag.NoOfParkedVehicles + " " + Html.Raw(ViewBag.Fordon) + " i garaget";
+    ViewBag.Title = ViewBag.NoOfParkedVehicles + " " + HttpUtility.HtmlDecode(ViewBag.Fordon) + " i garaget";
 }
 
 <h2>
@@ -13,35 +13,40 @@
     @ViewBag.Title
 </h2>
 
-@if (!string.IsNullOrEmpty(ViewBag.MemberName))
-{
 <p class="hidden-print">
-    @if (ViewBag.Fordon.StartsWith("bil"))
+    @if (!string.IsNullOrEmpty(ViewBag.MemberName))
     {
-        @Html.ActionLink("Parkera ny bil i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Car" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
-    }
-    else if (ViewBag.Fordon.StartsWith("buss"))
-    {
-        @Html.ActionLink("Parkera ny buss i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Bus" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
-    }
-    else if (ViewBag.Fordon.StartsWith("b&aring;t"))
-    {
-        @Html.ActionLink("Parkera ny båt i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Boat" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
-    }
-    else if (ViewBag.Fordon.StartsWith("flygplan"))
-    {
-        @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Airplane" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
-    }
-    else if (ViewBag.Fordon.StartsWith("motorcyk"))
-    {
-        @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Motorcycle" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        if (ViewBag.Fordon.StartsWith("bil"))
+        {
+            @Html.ActionLink("Parkera ny bil i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Car" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        }
+        else if (ViewBag.Fordon.StartsWith("buss"))
+        {
+            @Html.ActionLink("Parkera ny buss i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Bus" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        }
+        else if (ViewBag.Fordon.StartsWith("b&aring;t"))
+        {
+            @Html.ActionLink("Parkera ny båt i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Boat" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        }
+        else if (ViewBag.Fordon.StartsWith("flygplan"))
+        {
+            @Html.ActionLink("Parkera nytt flygplan i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Airplane" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        }
+        else if (ViewBag.Fordon.StartsWith("motorcyk"))
+        {
+            @Html.ActionLink("Parkera ny motorcykel i garaget", "Park", new { memberId = ViewBag.MemberId, typeOfVehicle = "Motorcycle" }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        }
+        else
+        {
+            @Html.ActionLink("Parkera nytt fordon i garaget", "Park", new { memberId = ViewBag.MemberId }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        }
     }
     else
     {
-        @Html.ActionLink("Parkera nytt fordon i garaget", "Park", new { memberId = ViewBag.MemberId }, htmlAttributes: new { title = "tillhörande " + ViewBag.MemberName });
+        @Html.ActionLink("Parkera nytt fordon i garaget", "Park");
     }
 </p>
-}
+
 
 <div class="hidden-print">
     <form method="GET" action="/Vehicles/DetailedIndex" class="hidden-print">
@@ -63,7 +68,7 @@
         @if (string.IsNullOrEmpty(ViewBag.MemberName))
         {
             <th>
-                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.Member.Name).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" }, htmlAttributes: new { title = "Sortera" })
+                @Html.ActionLink(HttpUtility.HtmlDecode(Html.DisplayNameFor(model => model.MemberId).ToString()), "DetailedIndex", new { typeOfVehicle = ViewBag.TypeOfVehicle, orderBy = "MemberName" }, htmlAttributes: new { title = "Sortera" })
             </th>
         }
             @if (ViewBag.TypeOfVehicle.Equals(""))

@@ -15,7 +15,7 @@ namespace Garage.Models
 
         public int Id { get; set; }
 
-        //[Display(Name = "Medlem")]
+        [Display(Name = "Ägare")]
         public int MemberId { get; set; }
         [Display(Name = "Ägare")]
         //[StringLength(100)]

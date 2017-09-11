@@ -10,7 +10,7 @@ namespace Garage.Models
     {
         public int Id { get; set; }
 
-
+        [Display(Name = "Ägare")]
         public int MemberId { get; set; }
 
         [Display(Name = "Ägare")]

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <?mso-application progid="Excel.Sheet"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
  xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -222,7 +222,7 @@
     <Cell><Data ss:Type="String">qsw098</Data></Cell>
     <Cell><Data ss:Type="String">BMW</Data></Cell>
     <Cell><Data ss:Type="String">520D</Data></Cell>
-    <Cell><Data ss:Type="String">svar</Data></Cell>
+    <Cell><Data ss:Type="String">svart</Data></Cell>
     <Cell><Data ss:Type="String">4</Data></Cell>
     <Cell><Data ss:Type="String">1</Data></Cell>
    </Row>

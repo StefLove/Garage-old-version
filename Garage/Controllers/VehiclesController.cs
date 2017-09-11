@@ -231,14 +231,21 @@ namespace Garage.Controllers
         public ActionResult Park(int memberId = 0, string memberName = "", string typeOfVehicle = "Vehicle")
         {
             int MemberId = memberId;
+            ViewBag.MemberIDNr = memberId;
+            if (MemberId > 0)
+            {
+                ViewBag.MemberName = db.Members.Where(m => m.Id == memberId).FirstOrDefault().Name;
+            }
 
             if (!string.IsNullOrEmpty(memberName))
             {
+                ViewBag.MemberName = memberName;
                 MemberId = db.Members.Find(memberName).Id;
+                ViewBag.MemberIdNr = memberId;
             }
 
             if (MemberId > 0) ViewBag.MemberId = new SelectList(db.Members.Include(m => m.Vehicles).Where(m2 => m2.Id == MemberId).OrderBy(m => m.Name), "Id", "Name", MemberId); //<-------tillagt
-            else ViewBag.MemberId = new SelectList(db.Members.Include(m => m.Vehicles).OrderBy(m => m.Name), "Id", "Name");           //----------------------Include behövs?
+            else ViewBag.MemberId= new SelectList(db.Members.Include(m => m.Vehicles).OrderBy(m => m.Name), "Id", "Name");           //----------------------Include behövs?
             //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes.Include(vt => vt.TypeOfVehicle), "Id", "Id"); //<---------------------Include behövs?
 
             if (typeOfVehicle.ToUpper() == TypeOfVehicle.Car.ToString().ToUpper())
@@ -352,7 +359,7 @@ namespace Garage.Controllers
             {
                 db.Entry(vehicle).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = vehicle.Id }); //<------ändrat!!
             }
             //ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
             //ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Id", vehicle.VehicleTypeId);

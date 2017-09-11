@@ -17,7 +17,7 @@ namespace Garage.Controllers
         // GET: VehicleTypes
         public ActionResult Index()
         {
-            return View(db.VehicleTypes.ToList());
+            return View(db.VehicleTypes.OrderBy(vt => vt.TypeOfVehicle).ToList());
         }
 
         // GET: VehicleTypes/Details/5
@@ -84,9 +84,9 @@ namespace Garage.Controllers
             {
                 db.Entry(vehicleType).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Vehicles", new { id = vehicleType.Id });  //RedirectToAction("Index");
             }
-            return View(vehicleType);
+            return View(vehicleType); 
         }
 
         // GET: VehicleTypes/Delete/5
@@ -103,51 +103,6 @@ namespace Garage.Controllers
             }
             return View(vehicleType);
         }
-
-        //// POST: ParkedVehicles/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Vehicle parkedVehicle = db.Vehicles.Find(id);
-        //    var checkOutTime = DateTime.Now;
-        //    TimeSpan parkingDuration = checkOutTime - parkedVehicle.CheckInTime;
-        //    ViewBag.CheckOutTime = checkOutTime;
-
-        //    ViewBag.ParkingFee = Fee(parkingDuration).ToString("F");
-        //    string pDuration;
-        //    if (parkingDuration.Days > 0)
-        //    {
-        //        pDuration = $"{parkingDuration:dd} dygn {parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
-        //    }
-        //    else pDuration = $"{parkingDuration:hh\\:mm\\:ss} (tt:mm:ss)";
-        //    ViewBag.ParkingDuration = pDuration;
-
-        //    db.Vehicles.Remove(parkedVehicle);
-        //    db.SaveChanges();
-        //    return View("Receipt", parkedVehicle);
-        //}
-
-        //private decimal Fee(TimeSpan parkingDuration)
-        //{
-        //    if ((parkingDuration.Minutes % 10) > 0 || ((parkingDuration.Minutes % 10 == 0) && (parkingDuration.Seconds > 0)))
-        //    {
-        //        return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10) + 1);
-        //    }
-        //    return 10 * ((parkingDuration.Days * 144) + (parkingDuration.Hours * 6) + (parkingDuration.Minutes / 10));
-        //}
-
-
-        //// POST: VehicleTypes/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    VehicleType vehicleType = db.VehicleTypes.Find(id);
-        //    db.VehicleTypes.Remove(vehicleType);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {

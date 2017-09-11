@@ -1,7 +1,7 @@
 ﻿@model Garage.Models.VehicleType
 
 @{
-    ViewBag.Title = "Ta bort fordonstyp";
+    ViewBag.Title = "Ta bort fordonstypen";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -16,7 +16,8 @@
             @Html.DisplayNameFor(model => model.TypeOfVehicle)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TypeOfVehicle)
+            @Html.EnumDropDownListFor(model => model.TypeOfVehicle, htmlAttributes: new { @class = "disabled", disabled = "disabled" })
+            @*@Html.DisplayFor(model => model.TypeOfVehicle)*@
         </dd>
     </dl>
 

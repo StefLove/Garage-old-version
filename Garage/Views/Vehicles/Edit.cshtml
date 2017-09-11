@@ -90,7 +90,7 @@
 }
 
 <div class="hidden-print">
-@Html.ActionLink("Tillbaka till garaget", "Index", null, new { title= "Klicka" })
+@Html.ActionLink("Tillbaka till garaget", "Index", new { memberId = Model.MemberId }, new { title= "Klicka" })
 </div>
 
 @section Scripts {

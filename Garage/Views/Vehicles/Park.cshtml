@@ -18,20 +18,27 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.MemberId, "Ägare", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MemberId", null, "", htmlAttributes: new { @class = "form-control", required = "required" })
+@if (string.IsNullOrEmpty(ViewBag.MemberName))
+{<div class="col-md-10">
+                @Html.DropDownList("MemberId", null, "Välj:", htmlAttributes: new { @class = "form-control", required = "required" })
                 @Html.ValidationMessageFor(model => model.MemberId, "", new { @class = "text-danger" })
+</div>
+}
+else
+{ <div class = "col-md-12" style="font-size:22px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;@Html.Raw(ViewBag.MemberName) 
+  </div>
+}
             </div>
-        </div>
 
-        @*@if (String.IsNullOrEmpty(ViewBag.TypeOfVehicle)) {*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.VehicleType.TypeOfVehicle, "Välj fordonstyp", htmlAttributes: new { @class = "control-label col-md-2" }) @*<--- ändring *@
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.VehicleType.TypeOfVehicle, "", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VehicleType.TypeOfVehicle, "", new { @class = "text-danger" })
-            </div>
+    @*@if (String.IsNullOrEmpty(ViewBag.TypeOfVehicle)) {*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.VehicleType.TypeOfVehicle, "Fordonstyp", htmlAttributes: new { @class = "control-label col-md-2" }) @*<--- ändring *@
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.VehicleType.TypeOfVehicle, "Välj:", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.VehicleType.TypeOfVehicle, "", new { @class = "text-danger" })
         </div>
+    </div>
         @*}*@
 
         <div class="form-group">
@@ -54,7 +61,7 @@
             @Html.LabelFor(model => model.NoOfWheels, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NoOfWheels, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.AntalHjul } })
-                @Html.ValidationMessageFor(model => model.NoOfWheels, "" , new { @class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.NoOfWheels, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -79,12 +86,12 @@
                 <input type="submit" value="Parkera @HttpUtility.HtmlDecode(ViewBag.ParkeraFordon)" class="btn btn-default" />
             </div>
         </div>
-    </div>
+        </div>
 }
 
-
+ 
 <div class="hidden-print">
-    @Html.ActionLink("Tillbaka till garaget", "Index")
+    @Html.ActionLink("Tillbaka till garaget", "Index", new { memberId = ViewBag.MemberIdNr })
 </div>
 
 @section Scripts {

@@ -6,9 +6,10 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
+@*<p class="hidden-print">
     @Html.ActionLink("Skapa ny fordonstyp", "Create", null, new { title = "Klicka" })
-</p>
+</p>*@
+
 <table class="table">
     <tr>
         <th>
@@ -18,29 +19,29 @@
             @Html.DisplayNameFor(model => model.Vehicles.FirstOrDefault().RegNumber)
         </th>
         <th>
-           @Html.DisplayNameFor(model => model.Vehicles.FirstOrDefault().Member.Name)
+           @Html.DisplayNameFor(model => model.Vehicles.FirstOrDefault().MemberId)
         </th>
-        <th></th>
+        <th class="hidden-print"></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-
             <td>
-                @Html.DisplayFor(modelItem => item.TypeOfVehicle)
+                @Html.EnumDropDownListFor(modelItem => item.TypeOfVehicle, htmlAttributes: new { @class = "disabled", disabled = "disabled" })
+                @*@Html.DisplayFor(modelItem => item.TypeOfVehicle)*@
             </td>
             <td>
-                @{ Garage.Models.Vehicle vehicle = item.Vehicles.Where(v => v.Id == item.Id).FirstOrDefault(); }
-                @Html.ActionLink(vehicle.RegNumber, "Details", "Vehicles", new { id = item.Id }, new { title = "Detaljer" })
+                @{ Garage.Models.Vehicle vehicle = item.Vehicles.Where(v => v.Id == item.Id).FirstOrDefault(); } @*<--------Gör en viewmodel*@
+                @Html.ActionLink(vehicle.RegNumber, "Details", "Vehicles", new { id = item.Id }, new { title = "Detaljer för fordon " + item.Id})
             </td>
             <td>
-                @Html.ActionLink(vehicle.Member.Name, "Details", "Members", new { id = item.Id }, new { title = "Detaljer" })
+                @Html.ActionLink(vehicle.Member.Name, "Details", "Members", new { id = vehicle.MemberId }, new { title = "Detaljer för medlem " + vehicle.MemberId })
             </td>
             <td>
                 @Html.ActionLink("Ändra", "Edit", new { id = item.Id }, new { title = "fordonstypen" }) |
-                @Html.ActionLink("Detaljer", "Details", new { id = item.Id }, new { title = "om fordonstypen" }) |
-                (@Html.ActionLink("Ta bort", "Delete", new { id = item.Id }, new { title = "fordonstypen", style = "color:red"})<text>)</text>
+                @Html.ActionLink("Detaljer", "Details", new { id = item.Id }, new { title = "om fordonstypen" }) @*|*@
+                @*(@Html.ActionLink("Ta bort", "Delete", new { id = item.Id }, new { title = "fordonstypen", style = "color:red"})<text>)</text>*@
             </td>
         </tr>
     }
@@ -48,6 +49,6 @@
 </table>
 
     <div class="hidden-print">
-        @Html.ActionLink("Till garaget", "Index", "Vehicles", null, new { title = "Klicka" })
+        @Html.ActionLink("Till fordonen", "Index", "Vehicles", null, new { title = "i garaget" })
     </div>
 
